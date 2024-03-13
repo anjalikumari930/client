@@ -14,7 +14,7 @@ const EditUser = ({ user, closeModal, updateUser }) => {
     try {
       const token = JSON.parse(localStorage.getItem("auth"))?.token;
       const res = await axios.patch(
-        `http://localhost:5000/api/v1/auth/users/${user._id}`,
+        `https://server-wyvg.onrender.com/api/v1/auth/users/${user._id}`,
         editedUser,
         {
           headers: {
@@ -26,7 +26,7 @@ const EditUser = ({ user, closeModal, updateUser }) => {
       // Update the user in the parent component
       updateUser(res.data.updatedUser);
       toast.success(res.data.message);
-      
+
       // Close the modal
       closeModal();
     } catch (error) {
@@ -53,7 +53,10 @@ const EditUser = ({ user, closeModal, updateUser }) => {
           </div>
           {/*body*/}
           <div className="relative p-6 flex-auto">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -66,7 +69,10 @@ const EditUser = ({ user, closeModal, updateUser }) => {
               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-blue-500"
             />
 
-            <label htmlFor="email" className="block mt-4 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block mt-4 text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -79,7 +85,10 @@ const EditUser = ({ user, closeModal, updateUser }) => {
               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-blue-500"
             />
 
-            <label htmlFor="role" className="block mt-4 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="role"
+              className="block mt-4 text-sm font-medium text-gray-700"
+            >
               Role
             </label>
             <input
@@ -92,7 +101,10 @@ const EditUser = ({ user, closeModal, updateUser }) => {
               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-blue-500"
             />
 
-            <label htmlFor="password" className="block mt-4 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block mt-4 text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input

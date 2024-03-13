@@ -8,23 +8,25 @@ const LoginAccount = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  
 
   // Form submission function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://server-wyvg.onrender.com/api/v1/auth/login",
+        {
+          username,
+          password,
+        }
+      );
 
       if (res.data.success) {
         const { user, token, message } = res.data;
-  
+
         localStorage.setItem("auth", JSON.stringify({ user, token }));
         toast.success(message);
-  
+
         // Check user role and navigate accordingly
         if (user.role === "employee") {
           navigate("/user/dashboard");
@@ -37,7 +39,6 @@ const LoginAccount = () => {
       } else {
         toast.error(res.data.message);
       }
-
     } catch (error) {
       console.error("Error during login:", error);
       toast.error("Something went wrong");
@@ -46,7 +47,7 @@ const LoginAccount = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-    <div className="w-full m-auto bg-white lg:max-w-lg border p-4 shadow-md">
+      <div className="w-full m-auto bg-white lg:max-w-lg border p-4 shadow-md">
         <div className="text-2xl text-center">Login</div>
         <div className="text-center">
           Enter your username and password to login

@@ -14,9 +14,12 @@ const ForgotPassword = () => {
     setIsLoading(true); // Set loading state to true
 
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/forgot-password", {
-        email,
-      });
+      const res = await axios.post(
+        "https://server-wyvg.onrender.com/api/v1/auth/forgot-password",
+        {
+          email,
+        }
+      );
       if (res && res.data.success) {
         toast.success("Password reset Request sent to Admin");
         navigate("/");

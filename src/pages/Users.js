@@ -18,18 +18,21 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const token = JSON.parse(localStorage.getItem("auth"))?.token;
-        const res = await axios.get("http://localhost:5000/api/v1/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            page: currentPage,
-            limit: 10, // You can adjust the limit as needed
-            search: searchTerm,
-            sort: sortBy,
-            order: sortOrder,
-          },
-        });
+        const res = await axios.get(
+          "https://server-wyvg.onrender.com/api/v1/users",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              page: currentPage,
+              limit: 10, // You can adjust the limit as needed
+              search: searchTerm,
+              sort: sortBy,
+              order: sortOrder,
+            },
+          }
+        );
 
         setUsers(res.data.users);
         setTotalPages(res.data.totalPages);
@@ -48,19 +51,24 @@ const Users = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      const isConfirmed = window.confirm("Are you sure you want to delete this user?");
-  
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this user?"
+      );
+
       if (!isConfirmed) {
         return;
       }
-  
+
       const token = JSON.parse(localStorage.getItem("auth"))?.token;
-      await axios.delete(`http://localhost:5000/api/v1/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
+      await axios.delete(
+        `https://server-wyvg.onrender.com/api/v1/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -105,10 +113,16 @@ const Users = () => {
       <table className="w-full border">
         <thead>
           <tr className="bg-gray-200">
-            <th className="border py-2 px-4" onClick={() => handleSort("username")}>
+            <th
+              className="border py-2 px-4"
+              onClick={() => handleSort("username")}
+            >
               Username
             </th>
-            <th className="border py-2 px-4" onClick={() => handleSort("email")}>
+            <th
+              className="border py-2 px-4"
+              onClick={() => handleSort("email")}
+            >
               Email
             </th>
             <th className="border py-2 px-4" onClick={() => handleSort("role")}>
@@ -144,15 +158,19 @@ const Users = () => {
 
       {/* Pagination */}
       <div className="flex justify-center mt-4">
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-          <button
-            key={page}
-            onClick={() => handlePageChange(page)}
-            className={`mx-2 p-2 border ${page === currentPage ? 'bg-gray-300' : ''}`}
-          >
-            {page}
-          </button>
-        ))}
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+          (page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`mx-2 p-2 border ${
+                page === currentPage ? "bg-gray-300" : ""
+              }`}
+            >
+              {page}
+            </button>
+          )
+        )}
       </div>
 
       {/* Edit User Modal */}

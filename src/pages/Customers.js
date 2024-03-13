@@ -18,12 +18,13 @@ const Customers = () => {
     const fetchCustomers = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v1/customers?page=${currentPage}&limit=10&search=${searchTerm}`,
-           {
+          `https://server-wyvg.onrender.com/api/v1/customers?page=${currentPage}&limit=10&search=${searchTerm}`,
+          {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          });
+          }
+        );
 
         setCustomers(res.data.customers);
         setTotalPages(res.data.totalPages);
@@ -33,7 +34,7 @@ const Customers = () => {
     };
 
     fetchCustomers();
-  }, [currentPage, searchTerm , token]);
+  }, [currentPage, searchTerm, token]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -60,24 +61,27 @@ const Customers = () => {
     setIsEditModalOpen(false);
   };
 
-
   const handleDeleteCustomer = async (customerId) => {
     try {
       // Display a confirmation dialog
-      const isConfirmed = window.confirm("Are you sure you want to delete this customer?");
-  
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this customer?"
+      );
+
       if (!isConfirmed) {
         // User canceled the deletion
         return;
       }
-  
+
       const res = await axios.delete(
-        `http://localhost:5000/api/v1/customers/${customerId}`, {
+        `https://server-wyvg.onrender.com/api/v1/customers/${customerId}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-  
+        }
+      );
+
       if (res.data.success) {
         // Reload the customers after deletion
         setCurrentPage(1);
@@ -87,7 +91,6 @@ const Customers = () => {
       console.error("Error deleting customer:", error);
     }
   };
-  
 
   return (
     <div className="flex-1 p-4 md:p-8 pt-6 mt-10 sm:ml-48 justify-center items-center overflow-y-auto max-h-screen">

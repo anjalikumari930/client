@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners"; // Import loading animation
 const AddCustomer = () => {
   const navigate = useNavigate();
   const authData = JSON.parse(localStorage.getItem("auth"));
+  /* eslint-disable no-unused-vars */
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const [customerData, setCustomerData] = useState({
@@ -34,7 +35,7 @@ const AddCustomer = () => {
     try {
       const token = authData?.token; // Replace with your actual storage key
       const res = await axios.post(
-        "http://localhost:5000/api/v1/customers",
+        "https://server-wyvg.onrender.com/api/v1/customers",
         customerData,
         {
           headers: {

@@ -16,19 +16,19 @@ const AddUser = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     setIsLoading(true); // Set loading state to true
-  
+
     // Form validation
     if (!username || !email || !password || !role) {
       setIsLoading(false); // Reset loading state
       setFormError("All fields are required");
       return;
     }
-  
+
     const token = JSON.parse(localStorage.getItem("auth"))?.token;
-  
+
     axios
       .post(
-        "http://localhost:5000/api/v1/auth/register",
+        "https://server-wyvg.onrender.com/api/v1/auth/register",
         {
           username,
           email,
@@ -56,14 +56,19 @@ const AddUser = () => {
         toast.error("User Or Email Already Registered");
       });
   };
-  
+
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleRegister} className="w-full max-w-sm p-4 bg-white rounded-md shadow-md">
+      <form
+        onSubmit={handleRegister}
+        className="w-full max-w-sm p-4 bg-white rounded-md shadow-md"
+      >
         <h2 className="text-2xl font-bold mb-4">Add New User</h2>
         {formError && <p className="text-red-500 mb-4">{formError}</p>}
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-600">Username</label>
+          <label htmlFor="username" className="block text-gray-600">
+            Username
+          </label>
           <input
             type="text"
             id="username"
@@ -74,7 +79,9 @@ const AddUser = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-600">Email</label>
+          <label htmlFor="email" className="block text-gray-600">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -85,7 +92,9 @@ const AddUser = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-600">Password</label>
+          <label htmlFor="password" className="block text-gray-600">
+            Password
+          </label>
           <input
             type="password"
             id="password"
@@ -96,7 +105,9 @@ const AddUser = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="role" className="block text-gray-600">Role</label>
+          <label htmlFor="role" className="block text-gray-600">
+            Role
+          </label>
           <select
             id="role"
             value={role}

@@ -17,7 +17,7 @@ const EditCustomer = ({ customer, closeModal, updateCustomer }) => {
       }
 
       const res = await axios.put(
-        `http://localhost:5000/api/v1/customers/${customer._id}`,
+        `https://server-wyvg.onrender.com/api/v1/customers/${customer._id}`,
         editedCustomer,
         {
           headers: {
@@ -60,7 +60,7 @@ const EditCustomer = ({ customer, closeModal, updateCustomer }) => {
         {formError && (
           <p className="text-red-500 mb-4 col-span-2">{formError}</p>
         )}
-        
+
         <div className="mb-4 col-span-2">
           <label htmlFor="companyName" className="block text-gray-600">
             Company Name
